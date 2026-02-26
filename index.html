@@ -6,7 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Si — Fall 2025</title>
   <meta name="description"
-    content="A love letter to Si, the most beautiful, supportive and nice Miniature Poodle — Fall 2025." />
+    content="Meet Si, the most beautiful miniature poodle, and see how she spent her favorite season of the year." />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Si's Autumn Adventures 2025 🐾" />
+  <meta property="og:description"
+    content="Meet Si, the most beautiful miniature poodle, and see how she spent her favorite season of the year." />
+  <meta property="og:image" content="si-profile-fall2025.jpeg" />
+  <meta property="og:type" content="website" />
+
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -673,7 +681,12 @@
     <!-- ── 1. Hero / Profile ──────────────────────────────────── -->
     <section id="hero">
       <div class="profile-ring float-a">
-        <img src="si-profile-fall2025.jpeg" alt="Si's profile photo — Fall 2025" />
+        <picture>
+          <source
+            srcset="si-profile-fall2025-400w.webp 400w, si-profile-fall2025-800w.webp 800w, si-profile-fall2025-1200w.webp 1200w"
+            sizes="(max-width: 768px) 165px, 210px" type="image/webp">
+          <img src="si-profile-fall2025.jpeg" alt="Si's profile photo — Fall 2025" loading="lazy" />
+        </picture>
       </div>
 
       <h1 class="hero-name">Si</h1>
@@ -712,22 +725,50 @@
 
       <div class="gallery-grid">
         <div class="gallery-item gi-1 float-a" data-src="si-playing-in-leaves.jpeg">
-          <img src="si-playing-in-leaves.jpeg" alt="Si playing in autumn leaves" loading="lazy" />
+          <picture>
+            <source
+              srcset="si-playing-in-leaves-400w.webp 400w, si-playing-in-leaves-800w.webp 800w, si-playing-in-leaves-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 50vw" type="image/webp">
+            <img src="si-playing-in-leaves.jpeg" alt="Si playing in autumn leaves" loading="lazy" />
+          </picture>
         </div>
         <div class="gallery-item gi-2 float-b" data-src="si-cozy-autumn-sweater.jpeg">
-          <img src="si-cozy-autumn-sweater.jpeg" alt="Si in a cozy autumn sweater" loading="lazy" />
+          <picture>
+            <source
+              srcset="si-cozy-autumn-sweater-400w.webp 400w, si-cozy-autumn-sweater-800w.webp 800w, si-cozy-autumn-sweater-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 50vw" type="image/webp">
+            <img src="si-cozy-autumn-sweater.jpeg" alt="Si in a cozy autumn sweater" loading="lazy" />
+          </picture>
         </div>
         <div class="gallery-item gi-3 float-c" data-src="si-park-walk-october.jpeg">
-          <img src="si-park-walk-october.jpeg" alt="Si on an October park walk" loading="lazy" />
+          <picture>
+            <source
+              srcset="si-park-walk-october-400w.webp 400w, si-park-walk-october-800w.webp 800w, si-park-walk-october-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw" type="image/webp">
+            <img src="si-park-walk-october.jpeg" alt="Si on an October park walk" loading="lazy" />
+          </picture>
         </div>
         <div class="gallery-item gi-4 float-d" data-src="si-fall-sunshine.jpeg">
-          <img src="si-fall-sunshine.jpeg" alt="Si in fall sunshine" loading="lazy" />
+          <picture>
+            <source
+              srcset="si-fall-sunshine-400w.webp 400w, si-fall-sunshine-800w.webp 800w, si-fall-sunshine-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 66vw" type="image/webp">
+            <img src="si-fall-sunshine.jpeg" alt="Si in fall sunshine" loading="lazy" />
+          </picture>
         </div>
         <div class="gallery-item gi-5 float-b" data-src="si-night.jpeg">
-          <img src="si-night.jpeg" alt="Si at night" loading="lazy" />
+          <picture>
+            <source srcset="si-night-400w.webp 400w, si-night-800w.webp 800w, si-night-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 50vw" type="image/webp">
+            <img src="si-night.jpeg" alt="Si at night" loading="lazy" />
+          </picture>
         </div>
         <div class="gallery-item gi-6 float-c" data-src="si-walk.jpeg">
-          <img src="si-walk.jpeg" alt="Si on a walk" loading="lazy" />
+          <picture>
+            <source srcset="si-walk-400w.webp 400w, si-walk-800w.webp 800w, si-walk-1200w.webp 1200w"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 50vw" type="image/webp">
+            <img src="si-walk.jpeg" alt="Si on a walk" loading="lazy" />
+          </picture>
         </div>
       </div>
     </section>
@@ -742,7 +783,7 @@
       <div class="video-grid">
         <div class="video-card float-b">
           <video controls preload="metadata" aria-label="Si running with Lana" muted autoplay loop playsinline>
-            <source src="si-running-with-lana.MOV" type="video/mp4" />
+            <source src="si-running-with-lana.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div class="video-label">Running with Lana</div>
@@ -750,7 +791,7 @@
 
         <div class="video-card float-c">
           <video controls preload="metadata" aria-label="Si fetching in the park" muted autoplay loop playsinline>
-            <source src="si-fetch-in-the-park.MOV" type="video/mp4" />
+            <source src="si-fetch-in-the-park.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div class="video-label">Fetch in the park</div>
@@ -766,7 +807,11 @@
 
       <div class="guest-content">
         <div class="guest-image float-b">
-          <img src="bobbie.jpeg" alt="Bobbie the toy poodle" loading="lazy" />
+          <picture>
+            <source srcset="bobbie-400w.webp 400w, bobbie-800w.webp 800w, bobbie-1200w.webp 1200w"
+              sizes="(max-width: 768px) 200px, 250px" type="image/webp">
+            <img src="bobbie.jpeg" alt="Bobbie the toy poodle" loading="lazy" />
+          </picture>
         </div>
         <div class="guest-text">
           <h3 class="guest-name">Bobbie <em>the handsome toy poodle</em></h3>
@@ -798,6 +843,13 @@
     document.querySelectorAll('.gallery-item').forEach(item => {
       item.addEventListener('click', () => {
         lbImg.src = item.dataset.src;
+        // Search for responsive srcsets and apply
+        const sourceNode = item.querySelector('source');
+        if (sourceNode && sourceNode.srcset) {
+          lbImg.srcset = sourceNode.srcset;
+        } else {
+          lbImg.srcset = "";
+        }
         lbImg.alt = item.querySelector('img').alt;
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
