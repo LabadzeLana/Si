@@ -434,6 +434,120 @@
       border-top: 1px solid var(--beige);
     }
 
+    /* ─── Guest Appearance ──────────────────────────────────── */
+    #guest {
+      animation: fadeUp 1.4s ease both 0.5s;
+    }
+
+    .guest-header {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .guest-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: var(--white);
+      border-radius: 24px;
+      padding: 40px 20px;
+      box-shadow: 0 16px 48px var(--shadow);
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guest-content::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, var(--terra-light) 0%, transparent 70%);
+      opacity: 0.1;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .guest-content:hover {
+      box-shadow: 0 28px 70px rgba(46, 39, 35, 0.12);
+    }
+
+    .guest-image {
+      width: 250px;
+      height: 250px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .guest-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 20px 60px var(--shadow), 0 4px 20px rgba(196, 120, 90, 0.15);
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .guest-content:hover .guest-image img {
+      transform: scale(1.03);
+    }
+
+    .guest-text {
+      color: var(--dark);
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .guest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .guest-name em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .guest-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 24px;
+    }
+
+    .guest-meta span::before {
+      content: '·  ';
+    }
+
+    .guest-meta span:first-child::before {
+      content: '';
+    }
+
+    .guest-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      font-weight: 300;
+      color: var(--dark);
+    }
+
+
+
     /* ─── Footer ────────────────────────────────────────────── */
     footer {
       position: relative;
@@ -521,6 +635,11 @@
       .profile-ring {
         width: 165px;
         height: 165px;
+      }
+
+      .guest-image {
+        width: 200px;
+        height: 200px;
       }
     }
 
@@ -635,6 +754,28 @@
             Your browser does not support the video tag.
           </video>
           <div class="video-label">Fetch in the park</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. Guest Appearance ──────────────────────────────────── -->
+    <section id="guest">
+      <div class="guest-header">
+        <span class="section-label">Guest Appearance</span>
+      </div>
+
+      <div class="guest-content">
+        <div class="guest-image float-b">
+          <img src="bobbie.jpeg" alt="Bobbie the toy poodle" loading="lazy" />
+        </div>
+        <div class="guest-text">
+          <h3 class="guest-name">Bobbie <em>the handsome toy poodle</em></h3>
+          <div class="guest-meta">
+            <span>Toy Poodle</span>
+            <span>Birthday&thinsp;·&thinsp;17 October 2025</span>
+            <span>Si's Cousin</span>
+          </div>
+          <p class="guest-description">Meet Bobbie, Si’s best friend and the most elegant companion.</p>
         </div>
       </div>
     </section>
