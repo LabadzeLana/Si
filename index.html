@@ -669,6 +669,130 @@
         min-height: 260px;
       }
     }
+
+    /* ─── Music Player ───────────────────────────────────────── */
+    #music-player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 100px 20px;
+      animation: fadeUp 1.4s ease both 0.5s;
+    }
+
+    .music-icon-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      border-radius: 50%;
+      box-shadow: 0 10px 30px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .music-icon-wrapper:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(46, 39, 35, 0.12);
+    }
+
+    .music-icon {
+      width: 32px;
+      height: 32px;
+      fill: var(--terracotta);
+    }
+
+    .music-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 32px;
+      max-width: 600px;
+      line-height: 1.4;
+    }
+
+    .player-container {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .player-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .play-btn {
+      background: var(--terracotta);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(130, 76, 55, 0.3);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.1);
+      background: #965a44;
+    }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--white);
+    }
+
+    .progress-wrapper {
+      width: 100%;
+      height: 4px;
+      background: var(--beige);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--terracotta);
+      width: 0%;
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+
+    .time-display {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -803,7 +927,44 @@
       </div>
     </section>
 
-    <!-- ── 5. Guest Appearance ──────────────────────────────────── -->
+    <!-- ── 5. Music Player ────────────────────────────────────── -->
+    <section id="music-player">
+      <div class="music-icon-wrapper float-a" id="music-toggle" aria-label="Play Music">
+        <svg class="music-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </svg>
+      </div>
+
+      <p class="music-text">
+        "Our favorite song for running together &mdash; 'Follow You' by Imagine Dragons."
+      </p>
+
+      <div class="player-container" id="player-ui">
+        <div class="player-controls">
+          <button class="play-btn" id="main-play-pause" title="Play/Pause">
+            <svg id="play-icon" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="progress-wrapper" id="progress-container">
+          <div class="progress-bar" id="progress-fill"></div>
+        </div>
+
+        <div class="time-display">
+          <span id="current-time">0:00</span>
+          <span id="duration-time">0:00</span>
+        </div>
+      </div>
+
+      <audio id="audio-file" src="si-autumn-theme.mp3" preload="metadata"></audio>
+    </section>
+
+    <!-- ── 6. Guest Appearance ──────────────────────────────────── -->
     <section id="guest">
       <div class="guest-header">
         <span class="section-label">Guest Appearance</span>
@@ -881,6 +1042,67 @@
       item.addEventListener('mouseleave', () => {
         item.style.transform = '';
       });
+    });
+
+    // ── Music Player Logic ────────────────────────────────────
+    const audio = document.getElementById('audio-file');
+    const playBtn = document.getElementById('main-play-pause');
+    const musicToggle = document.getElementById('music-toggle');
+    const playerUI = document.getElementById('player-ui');
+    const progressContainer = document.getElementById('progress-container');
+    const progressFill = document.getElementById('progress-fill');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationTimeEl = document.getElementById('duration-time');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playerUI.classList.add('active');
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        audio.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    }
+
+    musicToggle.addEventListener('click', togglePlay);
+    playBtn.addEventListener('click', togglePlay);
+
+    audio.addEventListener('timeupdate', () => {
+      const { duration, currentTime } = audio;
+      const progressPercent = (currentTime / duration) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+
+      // Update time labels
+      currentTimeEl.textContent = formatTime(currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationTimeEl.textContent = formatTime(audio.duration);
+    });
+
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    progressContainer.addEventListener('click', (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+      audio.currentTime = (clickX / width) * duration;
+    });
+
+    // Auto-hide player if paused for a while or ended
+    audio.addEventListener('ended', () => {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      progressFill.style.width = '0%';
     });
   </script>
 
